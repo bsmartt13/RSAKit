@@ -1,1 +1,17 @@
 RSAKit -- A Java RSA backend.
+
+I.	Introduction
+II.	Classes
+III.	  
+
+I.	Introduction
+Java has support for RSA cryptography, using the java.security package.  RSAkit allows the developer to use cryptography with minimal understanding of the underlying technology.
+
+II.	Classes
+RSAGen contains a key generator for generating RSA public and private keys.  RSAGen will ask for user input to get filenames and keysize.  Currently the public key must be the same size as the private key (I recommend leaving it this way; encryption/decryption will be faster this way).  The key files are written to disk as object files of primitive data and graphs of Java objects.  For more information on ObjectOutputStream, see http://docs.oracle.com/javase/1.4.2/docs/api/java/io/ObjectOutputStream.html.
+
+RSAUser is capable of reading object files of type RSAGen.  The public keys are then kept inside of an RSAUser as public variables accessible by other classes from the implemented application.  
+
+RSAKit implements the functionality needed for active RSA communication.  It can use the keys from RSAUsers to encrypt and decrypt data.  Most types of input are or will be supported in the near future.  The output of RSAKit is always byte[].  Java programmers might be surprised at this decision, but I feel it is the most powerful way to do network programming (if done correctly), and power is one of the goals of this project.  Those more familiar with C/C++, python, ruby, etc. might be more acquainted to this methodology.  The RSAKit.class also contains some helper methods for converting these data types which may be of additional use to you if raw data scares you (or maybe it simply isn't convenient on this occasion).
+
+RSAFileDrawer can be used for reading in files and writing files.  Doing these two tasks in Java is harder than one might expect, since when reading a file, our input (or with writing a file, our output) is always a raw byte array.  For reading a file into a byte array, org.apache.commons.io.FileUtils.readFileToByteArray(File file); is used (see  http://commons.apache.org/io/).  The code for writing a byte array to data is authored by myself.
